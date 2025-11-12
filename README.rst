@@ -11,8 +11,12 @@ Features
 simple_catalyst_center has following features:
     * manage login
     * download files
-    * wait for task results
+    * upload files
+    * run tasks with environment support and basic enforcement of required parameters
+    * wait for job results
+    * check job status
     * CRUD interface for all possible API URLs
+
 
 Installation
 ------------
