@@ -1,0 +1,84 @@
+Introduction
+==================
+
+simple_jinjamator is a simplified REST client for jinjamator
+
+
+
+Features
+-----------------
+
+simple_catalyst_center has following features:
+    * manage login
+    * download files
+    * wait for task results
+    * CRUD interface for all possible API URLs
+
+Installation
+------------
+
+Install  by running:
+
+.. code-block:: bash
+
+    pip3 install simple_jinjamator
+
+
+Examples
+---------
+
+run a task and download all generated files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+    
+    import os
+    import sys
+    from simple_jinjamator import JinjamatorClient
+    import logging
+    from getpass import getpass
+
+    base_url = input("Please Enter Jinjamator URL: ") or "http://localhost:5000"
+    username = input("Please Enter Jinjamator username: ") or "root"
+    password = getpass("Please Enter Catalyst password: ") or "<not set>"
+
+    URL=f"{base_url}/api"
+
+    jm_client = JinjamatorClient(URL, ssl_verify=False)
+    print("login to jinjamator with username and password using the local aaa povider")
+    jm_client.login(username, password, "local")
+    api = jm_client.api
+
+    print("start job in environment some/env with the parameter command and get the job id")
+
+    job_id=jm_client.run("/tasks/jinjamator101/discover_cisco_device",environment="some/env",command="show interface status")
+
+    print("poll job status and wait for success or failure (default timeout is 300s, default pollrate=10s) ")
+    jm_client.wait_for_job(job_id)
+
+    print("download all generated files to /tmp")
+    jm_client.download_job_files(job_id,"/tmp")
+
+
+for all options have a look at the JinjamatorClient class in simple_jinjamator/__init__.py
+
+
+Contribute
+----------
+
+- Issue Tracker: https://github.com/jinjamator/simple_jinjamator/issues
+- Source Code: https://github.com/jinjamator/simple_jinjamator
+
+Roadmap
+-----------------
+
+Selected Roadmap items:
+    * add more documentation
+    * add some more examples
+
+For documentation please refer to https://simple_jinjamator.readthedocs.io/en/latest/
+
+License
+-----------------
+
+This project is licensed under the Apache License Version 2.0
