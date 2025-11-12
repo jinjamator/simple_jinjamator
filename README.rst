@@ -44,7 +44,7 @@ run a task and download all generated files
 
     base_url = input("Please Enter Jinjamator URL: ") or "http://localhost:5000"
     username = input("Please Enter Jinjamator username: ") or "root"
-    password = getpass("Please Enter Catalyst password: ") or "<not set>"
+    password = getpass("Please Enter Jinjamator password: ") or "<not set>"
 
     URL=f"{base_url}/api"
 
